@@ -24,6 +24,5 @@ Systems will seed 5 users and 1 admin with common password which is `abc@12345` 
 
 ## Third Party resources
 - Theme: Material UI by Creative Tim: https://demos.creative-tim.com/vue-material-dashboard/#/dashboard
-- User Authentication: 
-- Calendar Plugin
-- DataTable: 
+- Spatie User Authentication
+- Calendar Plugin http://fullcalendar.io/
