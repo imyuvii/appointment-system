@@ -27,3 +27,19 @@ Systems will seed 5 users and 1 admin with common password which is `abc@12345` 
 - Theme: Material UI by Creative Tim: https://demos.creative-tim.com/vue-material-dashboard/#/dashboard
 - Spatie User Authentication
 - Calendar Plugin http://fullcalendar.io/
+
+## Screenshots
+### Login 
+![image](https://user-images.githubusercontent.com/4415797/139575294-6f0a7a8b-ade1-41d7-ad52-e14acda27379.png)
+
+### Appointments in next 2 hours:
+![image](https://user-images.githubusercontent.com/4415797/139575152-f03aa01e-e823-471c-8a81-15e7cef76aef.png)
+
+### Calendar View
+![image](https://user-images.githubusercontent.com/4415797/139575166-42ac3feb-2e4d-44c8-8f1d-dbf6b6c6b3b3.png)
+
+### Add new appointment by clicking on calendar date
+![image](https://user-images.githubusercontent.com/4415797/139575219-15c01584-fcb2-4f6e-9fcf-8a6781b51880.png)
+
+### View Appointment by clicking on Appointment under calendar view
+![image](https://user-images.githubusercontent.com/4415797/139575277-ef50bf58-992b-4ba9-b97c-1d23f491d21d.png)
