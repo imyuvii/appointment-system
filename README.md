@@ -1,7 +1,21 @@
 # Appointment System
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+An appointment system is where the user can add/edit or view his upcoming appointment. Application written in Laravel 8 with Vue & CSS Scaffolding.
 
+## Server Requirements
+The Laravel framework has a few system requirements. You should ensure that your web server has the following minimum PHP version and extensions:
+- PHP >= 7.3
+- BCMath PHP Extension
+- Ctype PHP Extension
+- Fileinfo PHP Extension
+- JSON PHP Extension
+- Mbstring PHP Extension
+- OpenSSL PHP Extension
+- PDO PHP Extension
+- Tokenizer PHP Extension
+- XML PHP Extension
+
+## Installation Guide
 - Extract the archive and put it in the folder you want
 - Run `cp .env.example .env` file to copy example file to `.env`
 - Then edit your `.env` file with DB credentials and other settings.
