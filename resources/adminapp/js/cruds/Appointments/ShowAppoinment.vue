@@ -15,14 +15,14 @@
                                 <div class="table">
                                     <table width="100%">
                                         <tbody>
-                                        <tr>
+<!--                                        <tr>
                                             <td class="text-primary">
                                                 {{ $t('cruds.appointment.fields.id') }}
                                             </td>
                                             <td>
                                                 {{ entry.id }}
                                             </td>
-                                        </tr>
+                                        </tr>-->
                                         <tr>
                                             <td class="text-primary">
                                                 {{ $t('cruds.appointment.fields.title') }}

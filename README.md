@@ -12,6 +12,7 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 - Run `npm install`
 - Run `npm run dev`
 - For file/photo fields, run `php artisan storage:link` command.
+- Done run `php artisan serve`
 
 ## Default credentials
 Systems will seed 5 users and 1 admin with common password which is `abc@12345` Here is the list

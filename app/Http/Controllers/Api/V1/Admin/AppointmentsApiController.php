@@ -7,9 +7,11 @@ use App\Http\Requests\StoreAppointmentRequest;
 use App\Http\Requests\UpdateAppointmentRequest;
 use App\Http\Resources\Admin\AppointmentResource;
 use App\Models\Appointment;
+use Carbon\Carbon;
 use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Validator;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -24,7 +26,12 @@ class AppointmentsApiController extends Controller
     {
         abort_if(Gate::denies('appointment_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new AppointmentResource(Appointment::advancedFilter());
+        $start_date = Carbon::now();
+        $end_date = Carbon::now()->addHours(2);
+        $user_id = Auth::id();
+        $appointments = Appointment::whereRaw("user_id = {$user_id} and (('{$start_date}' BETWEEN start_time and end_time) or ('{$end_date}' BETWEEN start_time and end_time))")
+            ->advancedFilter();
+        return new AppointmentResource($appointments);
     }
 
     /**
@@ -37,10 +44,12 @@ class AppointmentsApiController extends Controller
         $appointment = $request->input();
         $appointment['start_time'] = $appointment['date']. " " . $appointment['start_time'] . ":00";
         $appointment['end_time'] = $appointment['date']. " " . $appointment['end_time'] . ":00";
+        $appointment['user_id'] = Auth::id();
         unset($appointment['date']);
         $error = $error_code = null;
         if(strtotime($appointment['end_time']) > strtotime($appointment['start_time'])) {
-            $existing_appointment = Appointment::whereRaw("('{$appointment['start_time']}' BETWEEN start_time and end_time) or ('{$appointment['end_time']}' BETWEEN start_time and end_time)")->count();
+            $user_id = Auth::id();
+            $existing_appointment = Appointment::whereRaw("user_id = {$user_id} and (('{$appointment['start_time']}' BETWEEN start_time and end_time) or ('{$appointment['end_time']}' BETWEEN start_time and end_time))")->count();
             if($existing_appointment > 0) {
                 $error = "Appointment not available on selected time slot";
                 $error_code = 423;
@@ -174,9 +183,20 @@ class AppointmentsApiController extends Controller
      */
     public function getEvents(Request $request) {
         try {
+            $appointments = Appointment::selectRaw(DB::raw('id, title, date(start_time) as date, start_time, end_time'))
+                ->where('user_id','=', Auth::id())
+                ->whereNull('deleted_at')
+                ->get();
+            $data = [];
+            foreach ($appointments as $appointment) {
+                $start_time = date("h:i A", strtotime($appointment->start_time));
+                $end_time = date("h:i A", strtotime($appointment->end_time));
+                $appointment->title = "{$appointment->title} ({$start_time} - {$end_time})";
+                array_push($data, $appointment);
+            }
             return response()->json([
                 "result" => true,
-                "data" => Appointment::selectRaw(DB::raw('id, title, date(start_time) as date'))->whereNull('deleted_at')->get()
+                "data" => $data
             ], 200);
         } catch (\Exception $e) {
             return response()->json([

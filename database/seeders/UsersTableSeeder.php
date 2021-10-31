@@ -10,13 +10,13 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $users = [
-            /*[
+            [
                 'id'             => 1,
                 'name'           => 'Yoda',
                 'email'          => 'yoda@lorem.com',
                 'password'       => bcrypt('abc@12345'),
                 'remember_token' => null,
-            ],*/
+            ],
             [
                 'id'             => 2,
                 'name'           => 'Han Solo',
